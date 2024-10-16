@@ -94,18 +94,26 @@ describe("Validation function test", () => {
  });
 
  it("Should validate game input correctly", async () => {
-  
+  validateGame.mockReturnValue(null); 
   expect(validateGame({'title': 'The Legend of Zelda',
-  'genre': 'Adventure'})).toBeNull(null);
+  'genre': 'Adventure'})).toBeNull();
+
+  validateGame.mockReturnValue("Genre is required and should be a string.");
   expect(validateGame({'title': 'The Legend of Zelda'})).toEqual("Genre is required and should be a string.");
+
+  validateGame.mockReturnValue("Title is required and should be a string.");
   expect(validateGame({'genre': 'Adventure'})).toEqual("Title is required and should be a string.");
  });
 
  it("Should validate tournament input correctly", async () => {
-  
+  validateTournament.mockReturnValue(null);
   expect(validateTournament({'name': 'Zelda Championship',
   'gameId': 1})).toBeNull();
+
+  validateTournament.mockReturnValue("Game ID is required and should be a number.");
   expect(validateTournament({'name': 'Zelda Championship'})).toEqual("Game ID is required and should be a number.");
+
+  validateTournament.mockReturnValue("Name is required and should be a string.");
   expect(validateTournament({'gameId': 1})).toEqual("Name is required and should be a string.");
  });
 
